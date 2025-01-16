@@ -10,14 +10,15 @@ router.post('/product', async (req, res) => {
 
 
         const newProduct = await Product.create({
-            user_id,
-            item_id,
-            product_name,
-            brand_id,
-            packed_weight,
-            price,  // assuming price is a field
-            description  // assuming description is a field
+            user_id,  
+            item_id, 
+            product_name,  
+            brand_id,  
+            packed_weight,  
+            price,
+            description,
         });
+        
 
         res.status(201).json(newProduct);
     } catch (err) {

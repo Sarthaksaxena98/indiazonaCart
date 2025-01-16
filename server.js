@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');  // Import the cors module
 const sequelize = require('./utils/database');  // Import Sequelize instance
 
 // Import all route files
@@ -10,6 +11,9 @@ const cartItemRoutes = require('./routers/cartItemRoutes');
 const discountChargeRoutes = require('./routers/discountChargeRoutes');
 
 const app = express();
+
+// Enable CORS for all routes (default)
+app.use(cors());  // You can configure CORS options here if needed
 
 // Middleware
 app.use(bodyParser.json());
