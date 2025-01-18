@@ -9,23 +9,35 @@ const taxAmountRoutes = require('./routers/taxAmountRoutes');
 const orderRoutes = require('./routers/orderRoutes');
 const cartItemRoutes = require('./routers/cartItemRoutes');
 const discountChargeRoutes = require('./routers/discountChargeRoutes');
+const vendorInvoiceRoutes = require('./routers/venderRouter');
+const productOrderInvoiceRoutes = require('./routers/productOrderInvoiceRouter'); 
+const userAddressRouter = require('./routers/userAddressRouter'); 
+const userRoutes = require('./routers/userRouter');  
+
+
+
 
 const app = express();
 
-// Enable CORS for all routes (default)
-app.use(cors());  // You can configure CORS options here if needed
+app.use(cors());  
 
-// Middleware
+
 app.use(bodyParser.json());
 
-// Use routes for respective API endpoints
 app.use('/api/products', productRoutes);
 app.use('/api/taxes', taxAmountRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/cart-items', cartItemRoutes);
 app.use('/api/discounts', discountChargeRoutes);
+app.use('/api/invoice', vendorInvoiceRoutes);
+app.use('/api/invoices', productOrderInvoiceRoutes);
+app.use('/api/userAddress', userAddressRouter);
+app.use('/api/users', userRoutes);
 
-// Sync Sequelize models (this should be done only once on application startup)
+
+
+
+
 sequelize.sync().then(() => {
     console.log('Database synchronized');
 }).catch((error) => {
