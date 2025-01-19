@@ -1,31 +1,26 @@
 const express = require('express');
 const User = require('../models/users');  
+const helperController = require('../controller/helperController');
 
 const router = express.Router();
 
 router.get('/users', async (req, res) => {
   try {
-    const users = await User.findAll();  
-    res.status(200).json(users);  
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'An error occurred while fetching users' });
-  }
+    let returnData = await helperController.getAllUser(req, res); 
+    res.status(200).json(returnData);       
+} catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+}
 });
 
 router.get('/users/:id', async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id);  
-    
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    
-    res.status(200).json(user);  
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'An error occurred while fetching the user' });
-  }
+    let returnData = await helperController.getUserData(req, res); 
+    res.status(200).json(returnData);       
+} catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+}
+
 });
 
 module.exports = router;
